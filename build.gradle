@@ -1,0 +1,31 @@
+plugins {
+    id 'base'
+    id 'maven-publish'
+}
+
+group = 'com.github.netvue'
+version = '8.1.1'
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            artifactId = 'ffmpeg-kit-next'
+            artifact('libs/ffmpeg-kit-next-8.1.1.aar') {
+                extension = 'aar'
+            }
+            pom {
+                packaging = 'aar'
+                name = 'FFmpegKit Next'
+                description = 'Prebuilt FFmpegKit Next Android archive'
+                withXml {
+                    def dependencies = asNode().appendNode('dependencies')
+                    def dependency = dependencies.appendNode('dependency')
+                    dependency.appendNode('groupId', 'com.arthenica')
+                    dependency.appendNode('artifactId', 'smart-exception-java')
+                    dependency.appendNode('version', '0.2.1')
+                    dependency.appendNode('scope', 'runtime')
+                }
+            }
+        }
+    }
+}
