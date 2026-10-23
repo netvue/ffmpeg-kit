@@ -1,0 +1,8 @@
+jdk:
+  - openjdk17
+before_install:
+  - git lfs install --local
+  - git lfs pull
+  - chmod +x gradlew
+install:
+  - ./gradlew clean publishToMavenLocal
